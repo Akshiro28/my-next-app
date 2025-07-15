@@ -1,12 +1,41 @@
 @import "tailwindcss";
 
+@font-face {
+  font-family: 'Lexend';
+  src: url('/fonts/Lexend-Bold.ttf') format('truetype');
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: 'Lexend';
+  src: url('/fonts/Lexend-SemiBold.ttf') format('truetype');
+  font-weight: 600;
+}
+
+@font-face {
+  font-family: 'Lexend';
+  src: url('/fonts/Lexend-Medium.ttf') format('truetype');
+  font-weight: 500;
+}
+
 :root {
-  --background: #171717;
-  --foreground: #ffffff;
+  font-family: Lexend, Arial, sans-serif;
+
+  --background-rgb: 23, 23, 23;
+  --background: rgb(var(--background-rgb));
+  --background-80: rgba(var(--background-rgb), 0.8);
+
+  --foreground-rgb: 255, 255, 255;
+  --foreground: rgb(var(--foreground-rgb));
+  --foreground-80: rgba(var(--foreground-rgb), 0.8);
+  --foreground-20: rgba(var(--foreground-rgb), 0.2);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+}
+
+* {
+  font-family: Lexend, Arial, sans-serif;
 }

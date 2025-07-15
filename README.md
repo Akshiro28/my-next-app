@@ -1,4 +1,4 @@
-# My Next App 
+# MyNextApp 
 
 This is a small project I built using **Next.js** to expand my web development skillsets.
 It combines **React**, **Tailwind CSS**, and **Next.js** to explore modern frontend development concepts.
