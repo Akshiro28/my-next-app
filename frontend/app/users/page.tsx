@@ -2,19 +2,63 @@
 
 import { useEffect, useState } from 'react';
 
+interface User {
+  id: number;
+  name: string;
+  email: string;
+}
+
+interface Post {
+  id: number;
+  title: string;
+  body: string;
+}
+
+interface Comment {
+  id: number;
+  name: string;
+  body: string;
+}
+
+interface Album {
+  id: number;
+  title: string;
+}
+
+interface Photo {
+  id: number;
+  title: string;
+  thumbnailUrl: string;
+}
+
+interface Todo {
+  id: number;
+  title: string;
+  completed: boolean;
+}
+
 type DataType = 'users' | 'posts' | 'comments' | 'albums' | 'photos' | 'todos';
+
+type DataMap = {
+  users: User[];
+  posts: Post[];
+  comments: Comment[];
+  albums: Album[];
+  photos: Photo[];
+  todos: Todo[];
+};
 
 export default function JsonPlaceholderPractice() {
   const [selectedType, setSelectedType] = useState<DataType>('posts');
-  const [data, setData] = useState<any[]>([]);
+  const [data, setData] = useState<Partial<DataMap>>({});
   const [searchTerm, setSearchTerm] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
 
+  const [incomingData, setIncomingData] = useState<Partial<DataMap> | null>(null);
+  const [displayedType, setDisplayedType] = useState<DataType>('posts');
+
   const [dotsInputIndex, setDotsInputIndex] = useState<number | null>(null);
   const [customPage, setCustomPage] = useState('');
-
-  const [incomingData, setIncomingData] = useState<any[] | null>(null);
-  const [displayedType, setDisplayedType] = useState<DataType>('posts');
 
   const itemsPerPageMap: Record<DataType, number> = {
     users: 10,
@@ -32,10 +76,10 @@ export default function JsonPlaceholderPractice() {
       const res = await fetch(`https://jsonplaceholder.typicode.com/${selectedType}`);
       const json = await res.json();
 
-      setIncomingData(json);
+      setIncomingData({ [selectedType]: json });
 
       setTimeout(() => {
-        setData(json);
+        setData(prev => ({ ...prev, [selectedType]: json }));
         setIncomingData(null);
         setSearchTerm('');
         setCurrentPage(1);
@@ -46,7 +90,8 @@ export default function JsonPlaceholderPractice() {
     fetchData();
   }, [selectedType]);
 
-  const filteredData = (incomingData ?? data).filter((item) => {
+  const fullData = (incomingData?.[displayedType] || data[displayedType] || []) as any[];
+  const filteredData = fullData.filter((item) => {
     const term = searchTerm.toLowerCase();
 
     switch (displayedType) {
