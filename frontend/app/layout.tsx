@@ -10,12 +10,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`flex flex-col min-h-screen`}
-      >
+      <body>
         <Navbar />
 
-        <main className="flex-1 flex items-center justify-center text-center">
+        <main className="pt-[77px]">
           {children}
         </main>
 

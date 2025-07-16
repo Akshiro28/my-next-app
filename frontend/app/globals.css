@@ -27,8 +27,12 @@
 
   --foreground-rgb: 255, 255, 255;
   --foreground: rgb(var(--foreground-rgb));
-  --foreground-80: rgba(var(--foreground-rgb), 0.8);
+  --foreground-3: rgba(var(--foreground-rgb), 0.03);
+  --foreground-5: rgba(var(--foreground-rgb), 0.05);
   --foreground-20: rgba(var(--foreground-rgb), 0.2);
+  --foreground-30: rgba(var(--foreground-rgb), 0.3);
+  --foreground-50: rgba(var(--foreground-rgb), 0.3);
+  --foreground-80: rgba(var(--foreground-rgb), 0.8);
 }
 
 body {
@@ -38,4 +42,40 @@ body {
 
 * {
   font-family: Lexend, Arial, sans-serif;
+  transition: all 0.15s ease;
+}
+
+.bs-container {
+  max-width: 1320px;
+  width: calc(100vw - 47px);
+}
+
+@media (max-width: 1400px) {
+  .bs-container {
+    max-width: 1140px;
+  }
+}
+
+@media (max-width: 1200px) {
+  .bs-container {
+    max-width: 960px;
+  }
+}
+
+@media (max-width: 992px) {
+  .bs-container {
+    max-width: 720px;
+  }
+}
+
+@media (max-width: 768px) {
+  .bs-container {
+    max-width: 540px;
+  }
+}
+
+@media (max-width: 576px) {
+  .bs-container {
+    max-width: 100%;
+  }
 }
