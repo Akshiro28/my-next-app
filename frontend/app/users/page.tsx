@@ -48,6 +48,14 @@ type DataMap = {
   todos: Todo[];
 };
 
+function getTypedData<K extends DataType>(
+  displayedType: K,
+  incomingData: Partial<DataMap> | null,
+  data: Partial<DataMap>
+): DataMap[K] {
+  return (incomingData?.[displayedType] || data[displayedType] || []) as DataMap[K];
+}
+
 export default function JsonPlaceholderPractice() {
   const [selectedType, setSelectedType] = useState<DataType>('posts');
   const [data, setData] = useState<Partial<DataMap>>({});
@@ -90,21 +98,29 @@ export default function JsonPlaceholderPractice() {
     fetchData();
   }, [selectedType]);
 
-  const fullData = (incomingData?.[displayedType] || data[displayedType] || []) as any[];
+  const fullData = getTypedData(displayedType, incomingData, data);
   const filteredData = fullData.filter((item) => {
     const term = searchTerm.toLowerCase();
 
     switch (displayedType) {
-      case 'users':
-        return item.name.toLowerCase().includes(term) || item.email.toLowerCase().includes(term);
-      case 'posts':
-        return item.title.toLowerCase().includes(term) || item.body.toLowerCase().includes(term);
-      case 'comments':
-        return item.name.toLowerCase().includes(term) || item.body.toLowerCase().includes(term);
+      case 'users': {
+        const user = item as User;
+        return user.name.toLowerCase().includes(term) || user.email.toLowerCase().includes(term);
+      }
+      case 'posts': {
+        const post = item as Post;
+        return post.title.toLowerCase().includes(term) || post.body.toLowerCase().includes(term);
+      }
+      case 'comments': {
+        const comment = item as Comment;
+        return comment.name.toLowerCase().includes(term) || comment.body.toLowerCase().includes(term);
+      }
       case 'albums':
       case 'photos':
-      case 'todos':
-        return item.title?.toLowerCase().includes(term);
+      case 'todos': {
+        const obj = item as Album | Photo | Todo;
+        return obj.title?.toLowerCase().includes(term);
+      }
       default:
         return false;
     }
@@ -149,8 +165,11 @@ export default function JsonPlaceholderPractice() {
       case 'users':
         return (
           <ul className="grid xl:grid-cols-3 lg:grid-cols-2 gap-4 text-left">
-            {paginatedData.map(user => (
-              <li key={user.id} className="flex items-center ring ring-[var(--foreground-20)] py-6 px-8 rounded-lg bg-[var(--foreground-3)] hover:ring-[var(--foreground-50)] hover:bg-[var(--foreground-5)]">
+            {(paginatedData as User[]).map(user => (
+              <li
+                key={user.id}
+                className="flex items-center ring ring-[var(--foreground-20)] py-6 px-8 rounded-lg bg-[var(--foreground-3)] hover:ring-[var(--foreground-50)] hover:bg-[var(--foreground-5)]"
+              >
                 <img src="images/user-profile.png" alt="UserProfile" className="h-12" />
                 <div className="ms-2">
                   <p className="text-xl font-bold mb-1">{user.name}</p>
@@ -160,21 +179,26 @@ export default function JsonPlaceholderPractice() {
             ))}
           </ul>
         );
+
       case 'posts':
         return (
           <ul className="grid lg:grid-cols-2 gap-4 text-left">
-            {paginatedData.map(post => (
-              <li key={post.id} className="ring ring-[var(--foreground-20)] py-6 px-8 rounded-lg bg-[var(--foreground-3)] hover:ring-[var(--foreground-50)] hover:bg-[var(--foreground-5)]">
+            {(paginatedData as Post[]).map(post => (
+              <li
+                key={post.id}
+                className="ring ring-[var(--foreground-20)] py-6 px-8 rounded-lg bg-[var(--foreground-3)] hover:ring-[var(--foreground-50)] hover:bg-[var(--foreground-5)]"
+              >
                 <p className="text-xl font-bold mb-2">{post.title}</p>
                 <p className="text-sm text-[var(--foreground-50)]">{post.body}</p>
               </li>
             ))}
           </ul>
         );
+
       case 'comments':
         return (
           <ul className="grid lg:grid-cols-2 gap-4 text-left">
-            {paginatedData.map(comment => (
+            {(paginatedData as Comment[]).map(comment => (
               <li key={comment.id}>
                 <div className="flex h-full ring ring-[var(--foreground-20)] py-6 px-6 rounded-lg bg-[var(--foreground-3)] hover:ring-[var(--foreground-50)] hover:bg-[var(--foreground-5)]">
                   <img src="images/comment.png" alt="Comment" className="h-10" />
@@ -187,38 +211,53 @@ export default function JsonPlaceholderPractice() {
             ))}
           </ul>
         );
+
       case 'albums':
         return (
           <ul className="grid lg:grid-cols-2 gap-4">
-            {paginatedData.map(album => (
-              <li key={album.id} className="ring ring-[var(--foreground-20)] py-6 px-8 rounded-lg bg-[var(--foreground-3)] hover:ring-[var(--foreground-50)] hover:bg-[var(--foreground-5)]">
+            {(paginatedData as Album[]).map(album => (
+              <li
+                key={album.id}
+                className="ring ring-[var(--foreground-20)] py-6 px-8 rounded-lg bg-[var(--foreground-3)] hover:ring-[var(--foreground-50)] hover:bg-[var(--foreground-5)]"
+              >
                 <p className="text-xl font-bold mb-2">{album.title}</p>
               </li>
             ))}
           </ul>
         );
+
       case 'photos':
         return (
           <div className="grid xl:grid-cols-3 lg:grid-cols-2 gap-4">
-            {paginatedData.map(photo => (
-              <div key={photo.id} className="ring ring-[var(--foreground-20)] py-6 px-8 rounded-lg bg-[var(--foreground-3)] hover:ring-[var(--foreground-50)] hover:bg-[var(--foreground-5)]">
+            {(paginatedData as Photo[]).map(photo => (
+              <div
+                key={photo.id}
+                className="ring ring-[var(--foreground-20)] py-6 px-8 rounded-lg bg-[var(--foreground-3)] hover:ring-[var(--foreground-50)] hover:bg-[var(--foreground-5)]"
+              >
                 <img src={photo.thumbnailUrl} alt={photo.thumbnailUrl} className="w-full" />
                 <p className="text-sm mt-1 text-[var(--foreground-50)]">{photo.title}</p>
               </div>
             ))}
           </div>
         );
+
       case 'todos':
         return (
           <ul className="space-y-2 text-left">
-            {paginatedData.map(todo => (
+            {(paginatedData as Todo[]).map(todo => (
               <li key={todo.id} className="flex items-center">
-                <input type="checkbox" checked={todo.completed} readOnly className="mr-2 accent-sky-700" />
+                <input
+                  type="checkbox"
+                  checked={todo.completed}
+                  readOnly
+                  className="mr-2 accent-sky-700"
+                />
                 <span>{todo.title}</span>
               </li>
             ))}
           </ul>
         );
+
       default:
         return <p>No data</p>;
     }
