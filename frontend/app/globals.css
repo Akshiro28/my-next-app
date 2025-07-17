@@ -24,6 +24,7 @@
   --background-rgb: 23, 23, 23;
   --background: rgb(var(--background-rgb));
   --background-80: rgba(var(--background-rgb), 0.8);
+  --background-90: rgba(var(--background-rgb), 0.9);
 
   --foreground-rgb: 255, 255, 255;
   --foreground: rgb(var(--foreground-rgb));
@@ -33,6 +34,10 @@
   --foreground-30: rgba(var(--foreground-rgb), 0.3);
   --foreground-50: rgba(var(--foreground-rgb), 0.3);
   --foreground-80: rgba(var(--foreground-rgb), 0.8);
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
