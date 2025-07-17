@@ -29,7 +29,7 @@ export default function BlogPostPage() {
     return () => clearTimeout(timeout);
   }, [post]);
 
-  if (!post) return <h1 className="text-center py-16">404 - Post Not Found</h1>;
+  if (!post) return <h1 className="text-center flex items-center justify-center min-h-[calc(100vh-154px)] text-4xl">404 - Post Not Found</h1>;
 
   return (
     <main className="bs-container mx-auto px-4 py-16 grid grid-cols-1 lg:grid-cols-[220px_1fr_200px] gap-12">
@@ -66,6 +66,7 @@ export default function BlogPostPage() {
             day: "numeric",
           })}
         </p>
+        <p className="mb-8">"{post.excerpt}"</p>
         <div className="relative w-full aspect-[16/9] mb-8 rounded overflow-hidden">
           <img
             src={post.image}
