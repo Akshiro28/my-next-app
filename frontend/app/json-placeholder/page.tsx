@@ -220,7 +220,7 @@ export default function JsonPlaceholderPractice() {
                 key={album.id}
                 className="ring ring-[var(--foreground-20)] py-6 px-8 rounded-lg bg-[var(--foreground-3)] hover:ring-[var(--foreground-50)] hover:bg-[var(--foreground-5)]"
               >
-                <p className="text-xl font-bold mb-2">{album.title}</p>
+                <p className="text-xl font-bold">{album.title}</p>
               </li>
             ))}
           </ul>
