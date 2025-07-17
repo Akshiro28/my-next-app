@@ -66,8 +66,8 @@ export default function BlogPostPage() {
             day: "numeric",
           })}
         </p>
-        <p className="mb-8">"{post.excerpt}"</p>
-        <div className="relative w-full aspect-[16/9] mb-8 rounded overflow-hidden">
+        <p className="mb-8">&quot;{post.excerpt}&quot;</p>
+        <div className="relative w-full aspect-[16/9] mb-8 rounded-lg overflow-hidden">
           <img
             src={post.image}
             alt={post.title}
