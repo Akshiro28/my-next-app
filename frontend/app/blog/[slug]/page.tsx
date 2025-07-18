@@ -58,7 +58,7 @@ export default function BlogPostPage() {
 
       {/* Main content */}
       <div className="text-left">
-        <h1 className="text-5xl font-bold mb-2 text-center lg:text-left">{post.title}</h1>
+        <h1 className="text-3xl md:text-5xl font-bold mb-2 text-left">{post.title}</h1>
         <p className="text-sm text-muted-foreground text-[var(--foreground-50)] mb-6">
           {post.author} · {new Date(post.date).toLocaleDateString(undefined, {
             year: "numeric",

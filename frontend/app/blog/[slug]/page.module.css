@@ -12,3 +12,9 @@
   line-height: 2.5;
   margin-bottom: 1.25em;
 }
+
+@media (max-width: 768px) {
+  .article h2 {
+    font-size: 1.5rem;
+  }
+}

@@ -4,11 +4,11 @@ import { mockPosts } from './mockPosts';
 export default function BlogIndexPage() {
   return (
     <div className="min-h-[calc(100vh-154px)] flex-1 flex items-center">
-      <div className="bs-container mx-auto text-center ring p-12 rounded-xl ring-[var(--foreground-20)]">
-        <h1 className="text-6xl font-bold mb-8">Blog Posts</h1>
+      <div className="bs-container mx-auto text-center ring lg:p-12 md:p-8 p-4 rounded-xl ring-[var(--foreground-20)]">
+        <h1 className="md:text-6xl text-4xl font-bold mb-5 md:mb-8">Blog Posts</h1>
         <p className="mb-8">Browse through a collection of practice blog posts created while learning Next.js!</p>
 
-        <ul className="grid grid-cols-1 md:grid-cols-4 auto-rows-[1fr] gap-6 text-left">
+        <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 auto-rows-[1fr] lg:gap-6 gap-4 text-left">
           {mockPosts.map((post, index) => (
             <li
               key={post.slug}
@@ -24,7 +24,7 @@ export default function BlogIndexPage() {
                       className="w-full h-full object-cover"
                     />
                   </div>
-                  <p className={`font-semibold hover:underline hover:decoration-1 decoration-[var(--foreground-20)] underline-offset-6 mb-2 ${index === 0 ? 'text-3xl' : 'text-lg'}`}>
+                  <p className={`font-semibold hover:underline hover:decoration-1 decoration-[var(--foreground-20)] underline-offset-6 mb-2 ${index === 0 ? 'text-2xl md:text-3xl' : 'text-lg'}`}>
                     {post.title}
                   </p>
                 </div>

@@ -52,7 +52,7 @@ body {
 
 .bs-container {
   max-width: 1320px;
-  width: calc(100vw - 47px);
+  width: calc(100vw - 32px);
 }
 
 @media (max-width: 1400px) {
