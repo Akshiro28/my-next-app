@@ -168,7 +168,7 @@ export default function JsonPlaceholderPractice() {
             {(paginatedData as User[]).map(user => (
               <li
                 key={user.id}
-                className="flex items-center ring ring-[var(--foreground-20)] py-6 px-8 rounded-lg bg-[var(--foreground-3)] hover:ring-[var(--foreground-50)] hover:bg-[var(--foreground-5)]"
+                className="flex items-center ring ring-[var(--foreground-20)] md:py-6 md:px-8 p-4 rounded-lg bg-[var(--foreground-3)] hover:ring-[var(--foreground-50)] hover:bg-[var(--foreground-5)]"
               >
                 <img src="images/user-profile.png" alt="UserProfile" className="h-12" />
                 <div className="ms-2">
@@ -200,8 +200,8 @@ export default function JsonPlaceholderPractice() {
           <ul className="grid lg:grid-cols-2 gap-4 text-left">
             {(paginatedData as Comment[]).map(comment => (
               <li key={comment.id}>
-                <div className="flex h-full ring ring-[var(--foreground-20)] py-6 px-6 rounded-lg bg-[var(--foreground-3)] hover:ring-[var(--foreground-50)] hover:bg-[var(--foreground-5)]">
-                  <img src="images/comment.png" alt="Comment" className="h-10" />
+                <div className="flex h-full ring ring-[var(--foreground-20)] p-4 md:p-6 rounded-lg bg-[var(--foreground-3)] hover:ring-[var(--foreground-50)] hover:bg-[var(--foreground-5)]">
+                  <img src="images/comment.png" alt="Comment" className="h-8 md:h-10" />
                   <div className="ms-2">
                     <p className="text-xl font-bold mb-2">{comment.name}</p>
                     <p className="text-sm italic text-[var(--foreground-50)]">{comment.body}</p>
@@ -265,8 +265,8 @@ export default function JsonPlaceholderPractice() {
 
   return (
     <div className="min-h-[calc(100vh-154px)] flex-1 flex items-center">
-      <div className="bs-container text-center mx-auto ring rounded-xl ring-[var(--foreground-20)] p-12 w-full max-w-4xl">
-        <h1 className="text-4xl font-bold mb-6">
+      <div className="bs-container text-center mx-auto ring rounded-xl ring-[var(--foreground-20)] lg:p-12 md:p-8 p-4 w-full max-w-4xl">
+        <h1 className="md:text-4xl text-2xl font-bold mb-5 md:mb-8">
           Practicing with Sample API Data from{' '}
           <a
             href="https://jsonplaceholder.typicode.com/"
@@ -278,7 +278,7 @@ export default function JsonPlaceholderPractice() {
           </a>
         </h1>
 
-        <p className="max-w-[80%] mx-auto mb-8">
+        <p className="md:max-w-[80%] mx-auto mb-8">
           Explore various types of sample data like users, posts, photos, and more! Fetched live from JSONPlaceholder API.  
           Each dataset could has its own layout, so feel free to click around and see how the layout adapts!
         </p>
