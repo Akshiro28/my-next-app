@@ -84,3 +84,22 @@ body {
     max-width: 100%;
   }
 }
+
+@keyframes infinite-scroll {
+  0% {
+    transform: translateY(0);
+  }
+  5% {
+    transform: translateY(0);
+  }
+  95% {
+    transform: translateY(22px);
+  }
+  100% {
+    transform: translateY(22px);
+  }
+}
+
+.infinite-scroll {
+  animation: infinite-scroll 2.4s cubic-bezier(0.65, 0, 0.35, 1) infinite alternate;
+}
